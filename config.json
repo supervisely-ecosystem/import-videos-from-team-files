@@ -1,0 +1,21 @@
+{
+  "name": "Render video from images",
+  "type": "app",
+  "categories": [
+    "Videos"
+  ],
+  "description": "Render video from images dataset",
+  "docker_image": "supervisely/base-py-sdk:6.1.93",
+  "main_script": "src/main.py",
+  "modal_template": "src/modal.html",
+  "modal_template_state": {"frameRate": 1, "opacity": 50},
+  "task_location": "workspace_tasks",
+  "isolate": true,
+  "headless": true,
+  "icon": "https://i.imgur.com/BcwuD8m.png",
+  "icon_background": "#FFFFFF",
+  "context_menu": {
+    "target": ["images_dataset"],
+    "context_category": "Transform"
+  }
+}
