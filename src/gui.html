@@ -137,23 +137,35 @@
             </div>
         </sly-field>
 
+        <el-button
+                    class="regular mr10" type="primary"
+                    style="align-self: flex-end;"
+                    :loading="data.started === true"
+                    :disabled="(state.dstProjectMode === 'newProject' && state.dstProjectName.length === 0) ||
+                               (state.dstProjectMode === 'existingProject' && !state.dstProjectId) ||
+                               (state.dstDatasetMode === 'newDataset' && state.dstDatasetName.length === 0) ||
+                               (state.dstDatasetMode === 'existingDataset' && !state.selectedDatasetName)
+                               "
+                    @click="data.started = true; command('import_videos')">
+                <i class="zmdi zmdi-play mr5"></i> Start download
+            </el-button>
+            <div class="mt5" v-if="state.dstProjectMode === 'newProject' && state.dstProjectName.length === 0" style="color: red">
+                Please, define the name of a new project
+            </div>
+            <div class="mt5" v-if="state.dstProjectMode === 'existingProject' && !state.dstProjectId" style="color: red">
+                Please, select one of the existing projects
+            </div>
+            <div class="mt5" v-if="state.dstDatasetMode === 'newDataset' && state.dstDatasetName.length === 0" style="color: red">
+                Please, define the name of a new dataset
+            </div>
+            <div class="mt5" v-if="state.dstDatasetMode === 'existingDataset' && !state.selectedDatasetName" style="color: red">
+                Please, select one of the existing datasets
+            </div>
 
-
-<!--    <sly-select-team-workspace :team-id.sync="state.teamId" :workspace-id.sync="state.workspaceId"></sly-select-team-workspace>-->
-
-    <div class="fflex mt10">
-    <sly-field title="Input result project name">
-    <el-input v-model="state.resultingProjectName" placeholder="Please input"></el-input>
-    </sly-field>
-    </div>
-
-    <el-button
-            :disabled="!state.resultingProjectName || data.finished"
-            type="primary"
-            :loading="data.started"
-            @click="data.started = true; command('import_videos')">
-        <i class="zmdi zmdi-play" style="margin-right: 5px"></i> Start download
-    </el-button>
+            <div v-if="data.progressName1" class="mt10">
+                <div>{{data.progressName1}}: {{data.currentProgressLabel1}} / {{data.totalProgressLabel1}}</div>
+                <el-progress :percentage="Math.round(data.currentProgress1 * 100 / data.totalProgress1)"></el-progress>
+            </div>
 
     </sly-card>
 </div>

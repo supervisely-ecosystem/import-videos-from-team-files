@@ -1,21 +1,15 @@
 {
-  "name": "Render video from images",
+  "name": "Import videos in mp4 format",
   "type": "app",
   "categories": [
-    "Videos"
+    "Import"
   ],
-  "description": "Render video from images dataset",
+  "description": "Import videos from teamfiles in mp4 format",
   "docker_image": "supervisely/base-py-sdk:6.1.93",
   "main_script": "src/main.py",
-  "modal_template": "src/modal.html",
-  "modal_template_state": {"frameRate": 1, "opacity": 50},
+  "gui_template": "src/gui.html",
   "task_location": "workspace_tasks",
-  "isolate": true,
-  "headless": true,
   "icon": "https://i.imgur.com/BcwuD8m.png",
   "icon_background": "#FFFFFF",
-  "context_menu": {
-    "target": ["images_dataset"],
-    "context_category": "Transform"
-  }
+  "disable_stop": true
 }

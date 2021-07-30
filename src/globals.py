@@ -11,8 +11,5 @@ PROJECT_ID = int(os.environ['modal.state.slyProjectId'])
 TASK_ID = int(os.environ["TASK_ID"])
 
 storage_dir = my_app.data_dir
-result_folder = 'video_from_images'
-working_folder = 'working_folder'
 video_ext = '.mp4'
-dataset_name = 'video_from_images'
 logger = sly.logger
