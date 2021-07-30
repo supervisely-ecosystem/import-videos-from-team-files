@@ -33,11 +33,11 @@
     </pre>
 
 
-    <sly-card class="mt15" title="Input data">
+    <sly-card class="mt15" title="1. Input data">
 
-    <sly-field title="Path to folder with videos"
-                           description="Copy path to your folder with videos in Team files.">
-    <el-input v-model="state.pathToVideos" placeholder="Please input path to folder"></el-input>
+        <sly-field title="Path to folder with videos"
+                               description="Copy path to your folder with videos in Team files.">
+        <el-input v-model="state.pathToVideos" placeholder="Please input path to folder"></el-input>
     </sly-field>
 
 
@@ -48,8 +48,11 @@
             @click="data.started = true; command('preview')">
         <i class="zmdi zmdi-play" style="margin-right: 5px"></i> Scan dir
     </el-button>
+    </sly-card>
 
 
+
+    <sly-card v-if="data.tree" class="mt15" title="2. Select videos or folders" subtitle="All selected videos/directories will be download">
     <div>
         <sly-file-viewer :list="data.tree" v-model="state.selected"/>
     </div>
@@ -57,9 +60,86 @@
     </sly-card>
 
 
-    <sly-card class="mt15" title="Output data">
 
-    <sly-select-team-workspace :team-id.sync="state.teamId" :workspace-id.sync="state.workspaceId"></sly-select-team-workspace>
+    <sly-card v-show="state.selected.length > 0" class="mt15" title="3. Download settings" subtitle="Configure videos copying and destination project">
+
+        <sly-field title="Videos extention">
+            <el-checkbox v-model="state.checked" disabled>All videos will be converted to mp4 format</el-checkbox>
+        </sly-field>
+
+
+
+
+
+        <sly-field title="Result project"
+                   description="Define destination project and dataset">
+            <div class="fflex">
+
+                <el-radio class="radio"
+                          v-model="state.dstProjectMode"
+                          label="newProject"
+                          @input="(val) => {
+                            if (val === 'newProject') {
+                                state.dstDatasetMode = 'newDataset';
+                            }
+                          }"
+                >
+                    Create new project
+                </el-radio>
+                <el-radio class="radio" v-model="state.dstProjectMode" label="existingProject">Add to existing project
+                </el-radio>
+            </div>
+            <div class="mt5">
+                <div v-if="state.dstProjectMode === 'newProject'">
+                    <el-input placeholder="Please input project name" v-model="state.dstProjectName"></el-input>
+                    <div class="mt5" style="color: #5a6772">
+                        <i>If project with the same name already exists, a new name will be generated automatically</i>
+                    </div>
+                </div>
+                <div v-if="state.dstProjectMode === 'existingProject'">
+                    <sly-select-project
+                            :workspace-id="data.workspaceId"
+                            :project-id.sync="state.dstProjectId"
+                            :options="{showLabel: false, availableTypes: ['videos']}"
+                    >
+                    </sly-select-project>
+                </div>
+            </div>
+        </sly-field>
+        <sly-field title="Result dataset"
+                   description="All selected items will be placed to a single dataset. To create multiple datasets for
+                   different subsets of selected items do the following: select items -> import to one dataset, then select another items
+                    -> import them to another dataset, and so on ...">
+            <div class="fflex">
+                <el-radio class="radio" v-model="state.dstDatasetMode" label="newDataset">Create new dataset</el-radio>
+                <el-radio class="radio"
+                          v-model="state.dstDatasetMode"
+                          label="existingDataset"
+                          :disabled="state.dstProjectMode === 'newProject'">
+                    Add to existing dataset
+                </el-radio>
+            </div>
+            <div class="mt5">
+                <div v-if="state.dstDatasetMode === 'newDataset'">
+                    <el-input placeholder="Please input dataset name" v-model="state.dstDatasetName"></el-input>
+                    <div class="mt5" style="color: #5a6772">
+                        <i>If dataset with the same name already exists, a new name will be generated automatically</i>
+                    </div>
+                </div>
+                <div v-if="state.dstDatasetMode === 'existingDataset'">
+                    <sly-select-dataset
+                            :project-id="state.dstProjectId"
+                            :datasets.sync="state.selectedDatasetName"
+                            :options="{showLabel: false}"
+                    >
+                    </sly-select-dataset>
+                </div>
+            </div>
+        </sly-field>
+
+
+
+<!--    <sly-select-team-workspace :team-id.sync="state.teamId" :workspace-id.sync="state.workspaceId"></sly-select-team-workspace>-->
 
     <div class="fflex mt10">
     <sly-field title="Input result project name">
@@ -71,94 +151,9 @@
             :disabled="!state.resultingProjectName || data.finished"
             type="primary"
             :loading="data.started"
-            @click="data.started = true; command('import_pascal_voc')">
-        <i class="zmdi zmdi-play" style="margin-right: 5px"></i> Run
+            @click="data.started = true; command('import_videos')">
+        <i class="zmdi zmdi-play" style="margin-right: 5px"></i> Start download
     </el-button>
 
     </sly-card>
-
-<!--    <sly-card class="mt15" title="Import" subtitle="Choose whether to import public or custom data">-->
-<!--        <el-tabs class="el-tabs-cards" type="border-card" v-model="state.mode">-->
-<!--            <el-tab-pane label="public" name="public">-->
-<!--                <el-radio v-model="state.mode" slot="label" label="public">-->
-<!--                    Public Data-->
-<!--                    <div>Import public Pascal VOC 2012 dataset</div>-->
-<!--                </el-radio>-->
-<!--                <sly-field title="Select Datasets"-->
-<!--                           description="Public Pascal VOC has several predefined splits">-->
-<!--                    <div class="mt5">-->
-<!--                        <el-checkbox v-model="state.trainval" label="trainval"></el-checkbox>-->
-<!--                    </div>-->
-<!--                    <div class="mt5">-->
-<!--                        <el-checkbox v-model="state.train" label="train"></el-checkbox>-->
-<!--                    </div>-->
-<!--                    <div class="mt5">-->
-<!--                        <el-checkbox v-model="state.val" label="val"></el-checkbox>-->
-<!--                    </div>-->
-<!--                    <div class="mt5">-->
-<!--                        <el-checkbox v-model="state.test" label="test"></el-checkbox>-->
-<!--                    </div>-->
-<!--                    <div class="mt15">-->
-<!--                        <sly-field title="Sample Percent"-->
-<!--                                   description="Percent of data for every split above">-->
-<!--                            <div class="fflex">-->
-<!--                                <el-slider v-model="state.samplePercent" :min="0" :max="100" :step="1" show-input-->
-<!--                                           style="width: 500px;"-->
-<!--                                           show-input>-->
-<!--                                </el-slider>-->
-<!--                                <span class="ml5">%</span>-->
-<!--                            </div>-->
-<!--                        </sly-field>-->
-<!--                    </div>-->
-<!--                </sly-field>-->
-
-<!--            </el-tab-pane>-->
-<!--            <el-tab-pane label="custom" name="custom">-->
-<!--                <el-radio v-model="state.mode" slot="label" label="custom">-->
-<!--                    Custom Data-->
-<!--                    <div>Import custom Pascal VOC 2012 dataset</div>-->
-<!--                </el-radio>-->
-<!--                <sly-field title="Path to Custom Data"-->
-<!--                           description="Copy path to your Pascal custom data from Team Files and paste it to input field.">-->
-<!--                    <el-input v-model="state.customDataPath" :disabled="data.started"-->
-<!--                              placeholder="Path to custom data in Team Files"></el-input>-->
-<!--                </sly-field>-->
-<!--            </el-tab-pane>-->
-<!--        </el-tabs>-->
-<!--    </sly-card>-->
-
-<!--    <div class="mt10">-->
-<!--        <sly-card title="Output project">-->
-<!--            <sly-select-team-workspace :team-id.sync="state.teamId"-->
-<!--                                       :workspace-id.sync="state.workspaceId"></sly-select-team-workspace>-->
-<!--            <sly-field title="Project Name"-->
-<!--                       description="If project name already exists in selected workspace, a number will be added to the end of the name. e.g. my_project -> my_project_001">-->
-<!--                <el-input v-model="state.resultingProjectName" placeholder="my_Project"></el-input>-->
-<!--            </sly-field>-->
-<!--            <div class="fflex mt10">-->
-<!--                <el-button-->
-<!--                        :disabled="!state.resultingProjectName || data.finished"-->
-<!--                        type="primary"-->
-<!--                        :loading="data.started"-->
-<!--                        @click="data.started = true; command('import_pascal_voc')"-->
-<!--                >-->
-<!--                    <i class="zmdi zmdi-play" style="margin-right: 5px"></i> Run-->
-<!--                </el-button>-->
-<!--                <div class="ml5" v-if="!state.resultingProjectName" style="color: red"> Enter name for resulting project-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div v-if="data.progressName" class="mt10">-->
-<!--                <div class="ml10" v-if="data.started === true && state.resultingProjectName">-->
-<!--                    <div>{{data.progressName}} {{data.currentProgressLabel}} / {{data.totalProgressLabel}}</div>-->
-<!--                    <el-progress-->
-<!--                            :percentage="Math.round(data.currentProgress * 100 / data.totalProgress)"></el-progress>-->
-<!--                </div>-->
-<!--                <sly-field v-if="data.finished === true" title=""-->
-<!--                           description="New project has been successfully created">-->
-<!--                    <a slot="title" target="_blank" :href="`/projects/${data.resultProjectId}/datasets`">{{data.resultProject}}</a>-->
-<!--                    <sly-icon slot="icon" :options="{ imageUrl: `${data.resultProjectPreviewUrl}` }"/>-->
-<!--                </sly-field>-->
-<!--            </div>-->
-<!--        </sly-card>-->
-<!--    </div>-->
-<!--</div>-->
+</div>
