@@ -14,7 +14,6 @@ def init(data, state):
     data["connecting"] = False
 
     state["pathToVideos"] = ""
-
     state["selected"] = ""
     state["checked"] = True
 

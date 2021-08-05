@@ -21,7 +21,7 @@ def preview(api: sly.Api, task_id, context, state, app_logger):
     try:
         files = api.file.list2(g.TEAM_ID, path)
     except Exception as e:
-        g.my_app.show_modal_window("Can not find bucket or permission denied. Please, check if provider / bucket name are "
+        g.my_app.show_modal_window("Can not find folder or permission denied. Please, check if path is "
                               "correct or contact tech support", level="warning")
         fields = [
             {"field": "data.tree", "payload": None},
