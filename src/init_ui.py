@@ -13,8 +13,7 @@ def init(data, state):
     data["tree"] = False
     data["connecting"] = False
 
-    state["pathToVideos"] = "/sample_videos_for_import"
-
+    state["pathToVideos"] = ""
     state["selected"] = ""
     state["checked"] = True
 
