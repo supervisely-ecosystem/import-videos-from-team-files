@@ -53,7 +53,7 @@ Application imports selected videos from `Team Files` to selected destination.
 
 **Step 1**: Copy path to folder with videos from `Team Files` and paste path to the text field.
 
-`gif` copy paste
+<img src="https://i.imgur.com/4aTW5bk.gif"/>
 
 **Step 2:** Press the `Scan directory` button.
 
