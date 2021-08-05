@@ -1,10 +1,10 @@
 {
-  "name": "Import videos in mp4 format",
+  "name": "Import Videos from Team Files",
   "type": "app",
   "categories": [
     "Import"
   ],
-  "description": "Import videos from teamfiles in mp4 format",
+  "description": "Import selected videos from Team Files to selected destination",
   "docker_image": "supervisely/base-py-sdk:6.1.93",
   "main_script": "src/main.py",
   "gui_template": "src/gui.html",
