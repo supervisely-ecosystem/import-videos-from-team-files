@@ -113,9 +113,14 @@ def render_video_from_images(api: sly.Api, task_id, context, state, app_logger):
 
     init_ui.reset_progress(api, task_id, 1)
 
-    g.my_app.show_modal_window(f"{vid_count} videos has been successfully imported to the project \"{project.name}\""
-                          f", dataset \"{dataset.name}\". You can continue importing other videos to the same or new "
-                          f"project. If you've finished with the app, stop it manually.")
+    if vid_count > 1:
+        g.my_app.show_modal_window(f"{vid_count} videos have been successfully imported to the project \"{project.name}\""
+                              f", dataset \"{dataset.name}\". You can continue importing other videos to the same or new "
+                              f"project. If you've finished with the app, stop it manually.")
+    if vid_count == 1:
+        g.my_app.show_modal_window(f"{vid_count} video has been successfully imported to the project \"{project.name}\""
+                              f", dataset \"{dataset.name}\". You can continue importing other videos to the same or new "
+                              f"project. If you've finished with the app, stop it manually.")
 
     api.app.set_field(task_id, "data.started", False)
     api.task.set_output_project(task_id, project.id, project.name)
