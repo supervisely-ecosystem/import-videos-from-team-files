@@ -62,6 +62,12 @@ def render_video_from_images(api: sly.Api, task_id, context, state, app_logger):
         else:
             videos_pathes.append(path)
 
+    if len(videos_pathes) == 0:
+        g.my_app.show_modal_window("There are no videos to import", "warning")
+        sly.logger.warn("nothing to download")
+        api.app.set_field(task_id, "data.processing", False)
+        return
+
     project = None
     if state["dstProjectMode"] == "newProject":
         project = api.project.create(workspace_id, state["dstProjectName"], sly.ProjectType.VIDEOS,
@@ -82,11 +88,13 @@ def render_video_from_images(api: sly.Api, task_id, context, state, app_logger):
         return
 
     progress_items_cb = init_ui.get_progress_cb(api, task_id, 1, "Finished", len(videos_pathes))
+    vid_count = len(videos_pathes)
     for video_path in videos_pathes:
         if is_valid_ext(get_file_ext(video_path)) is False:
             app_logger.warn(
                 'File with extention {} can not be processed. Allowed video extentions {}'.format(get_file_ext(video_path),
                                                                                            ALLOWED_VIDEO_EXTENSIONS))
+            vid_count -= 1
             continue
 
         video_name = get_file_name_with_ext(video_path)
@@ -104,6 +112,10 @@ def render_video_from_images(api: sly.Api, task_id, context, state, app_logger):
         progress_items_cb(1)
 
     init_ui.reset_progress(api, task_id, 1)
+
+    g.my_app.show_modal_window(f"{vid_count} videos has been successfully imported to the project \"{project.name}\""
+                          f", dataset \"{dataset.name}\". You can continue importing other videos to the same or new "
+                          f"project. If you've finished with the app, stop it manually.")
 
     api.app.set_field(task_id, "data.started", False)
     api.task.set_output_project(task_id, project.id, project.name)
