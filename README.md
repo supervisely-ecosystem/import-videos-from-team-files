@@ -38,21 +38,40 @@ Application imports selected videos from `Team Files` to selected destination.
 **Note:** all videos will be converted to `MP4` format during import.
 
 ## How To Run 
+
 **Step 1**: Add app to your team from [Ecosystem](https://app.supervise.ly/apps/ecosystem/import-videos) if it is not there.
 
-**Step 2**: Open `Plugins & Apps` -> `Import Videos from Team Files` -> `Run` 
+**Step 2**: Run app from `Team` -> `Plugins & Apps` page.  After running the app you will be redirected to the `Tasks` page.
+
+<img src="https://i.imgur.com/eOIRUFQ.png"/>
+
+**Step 3**: Waiting until the app is started. Once app is started, new task will appear in `workspace tasks` (1). Wait for message `Application is started ...` and then press `Open` button (2).
+
+<img src="https://i.imgur.com/LXFkpuB.png"/>
 
 ## How to use
 
-**Step 1**: Choose path to folder in team files with videos.
+**Step 1**: Copy path to folder with videos from `Team Files` and paste path to the text field.
 
-**Step 2:** Select videos or folders with videos to download.
+`gif` copy paste
 
-**Step 3:** Select result project and dataset names. You can download videos to new video project, add videos to existing video project by adding videos to existing dataset or creating new dataset.
+**Step 2:** Press the `Scan directory` button.
 
-After running the application, you can see videos download progress. Then progress is finished, you can find new videos in project you select in `step5`. 
+<img src="https://i.imgur.com/M8buUJ2.png"/>
 
-**Note:**
+**Step 3:** Select videos or folders with videos to download.
 
-After loading the videos, the application will continue its work, so you can choose another videos and continue work.
+**Step 4:** Select result project and dataset names. You can import videos to new project or add videos to existing project.
+
+**Step 5:** Press the `START IMPORT` button.
+
+<img src="https://i.imgur.com/FnY6cqo.png" width="600"/>
+
+**Note:** When import is finished, you can find imported videos in selected project.
+
+<img src="https://i.imgur.com/FiMdO0Z.png" width="400"/>
+
+Application will continue its work, so you can import another videos.
 You can stop app session in `Plugins & Apps` -> `Import videos in MP4 format` by pressing the `STOP` button.
+
+<img src="https://i.imgur.com/7IFlY2Q.png" width="600"/>
