@@ -88,6 +88,7 @@ def render_video_from_images(api: sly.Api, task_id, context, state, app_logger):
             app_logger.warn(
                 'File with extention {} can not be processed. Allowed video extentions {}'.format(get_file_ext(video_path),
                                                                                            ALLOWED_VIDEO_EXTENSIONS))
+            progress_items_cb(1)
             vid_count -= 1
             continue
 
