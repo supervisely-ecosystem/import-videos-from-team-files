@@ -1,14 +1,10 @@
 import os
+import init_ui
 import globals as g
 import supervisely_lib as sly
-import init_ui
-from supervisely_lib.io.fs import get_file_name_with_ext, get_file_ext, get_file_name
 import moviepy.editor as moviepy
+from supervisely_lib.io.fs import get_file_name_with_ext, get_file_ext, get_file_name
 from supervisely_lib.video.video import is_valid_ext, ALLOWED_VIDEO_EXTENSIONS
-
-
-team_id = int(os.environ['context.teamId'])
-workspace_id = int(os.environ['context.workspaceId'])
 
 
 @g.my_app.callback("preview")
@@ -50,9 +46,7 @@ def preview(api: sly.Api, task_id, context, state, app_logger):
 @g.my_app.callback("import_videos")
 @sly.timeit
 def render_video_from_images(api: sly.Api, task_id, context, state, app_logger):
-
     selected_pathes = state["selected"]
-
     videos_pathes = []
     for path in selected_pathes:
         if get_file_ext(path) == '':
@@ -70,7 +64,7 @@ def render_video_from_images(api: sly.Api, task_id, context, state, app_logger):
 
     project = None
     if state["dstProjectMode"] == "newProject":
-        project = api.project.create(workspace_id, state["dstProjectName"], sly.ProjectType.VIDEOS,
+        project = api.project.create(g.WORKSPACE_ID, state["dstProjectName"], sly.ProjectType.VIDEOS,
                                      change_name_if_conflict=True)
     elif state["dstProjectMode"] == "existingProject":
         project = api.project.get_info_by_id(state["dstProjectId"])
@@ -99,7 +93,7 @@ def render_video_from_images(api: sly.Api, task_id, context, state, app_logger):
 
         video_name = get_file_name_with_ext(video_path)
         video_download_path = os.path.join(g.storage_dir, video_name)
-        api.file.download(team_id, video_path, video_download_path)
+        api.file.download(g.TEAM_ID, video_path, video_download_path)
 
         if get_file_ext(video_name) != g.video_ext:
             new_video_name = get_file_name(video_name) + g.video_ext
@@ -139,7 +133,7 @@ def main():
     data = {}
     state = {}
 
-    init_ui.init_context(data, team_id, workspace_id)
+    init_ui.init_context(data, g.TEAM_ID, g.WORKSPACE_ID)
     init_ui.init(data, state)
     init_ui.init_progress(data,state)
     g.my_app.run(data=data, state=state)
