@@ -2,7 +2,8 @@
   "name": "Import Videos from Team Files",
   "type": "app",
   "categories": [
-    "Import"
+    "import",
+    "videos"
   ],
   "description": "Import selected videos from Team Files to selected destination",
   "docker_image": "supervisely/base-py-sdk:6.1.93",
