@@ -1,2 +1,2 @@
-supervisely==6.1.93
+supervisely[apps]==6.25.0
 moviepy==1.0.3
