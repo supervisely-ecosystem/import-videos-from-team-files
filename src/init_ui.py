@@ -1,6 +1,8 @@
 import supervisely_lib as sly
 from functools import partial
 
+import globals as g
+
 
 def init_context(data, team_id, workspace_id):
     data["teamId"] = team_id
@@ -13,7 +15,7 @@ def init(data, state):
     data["tree"] = False
     data["connecting"] = False
 
-    state["pathToVideos"] = ""
+    state["pathToVideos"] = g.INPUT_PATH
     state["selected"] = ""
     state["checked"] = True
 
