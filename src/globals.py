@@ -6,7 +6,7 @@ my_app = sly.AppService()
 api: sly.Api = my_app.public_api
 
 TEAM_ID = int(os.environ['context.teamId'])
-INPUT_PATH = os.environ.get("modal.state.slyFolder", None)
+INPUT_PATH = os.environ.get("modal.state.slyFolder", "")
 WORKSPACE_ID = int(os.environ['context.workspaceId'])
 TASK_ID = int(os.environ["TASK_ID"])
 
