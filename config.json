@@ -15,5 +15,10 @@
   "icon_cover": true,
   "icon_background": "#FFFFFF",
   "disable_stop": true,
+  "context_menu": {
+    "target": [
+      "files_folder"
+    ]
+  },
   "poster": "https://github.com/supervisely-ecosystem/import-videos-from-team-files/releases/download/v1.0.0/poster.png"
 }
