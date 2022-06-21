@@ -11,8 +11,9 @@
   "main_script": "src/main.py",
   "gui_template": "src/gui.html",
   "task_location": "workspace_tasks",
-  "icon": "https://i.imgur.com/DHV83NM.png",
+  "icon": "https://github.com/supervisely-ecosystem/import-videos-from-team-files/releases/download/v1.0.0/icon.png",
+  "icon_cover": true,
   "icon_background": "#FFFFFF",
   "disable_stop": true,
-  "poster": "https://i.imgur.com/Wo7XOMm.png"
+  "poster": "https://github.com/supervisely-ecosystem/import-videos-from-team-files/releases/download/v1.0.0/poster.png"
 }
