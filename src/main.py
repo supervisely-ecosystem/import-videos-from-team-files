@@ -137,7 +137,11 @@ def main():
     init_ui.init_context(data, g.TEAM_ID, g.WORKSPACE_ID)
     init_ui.init(data, state)
     init_ui.init_progress(data,state)
-    g.my_app.run(data=data, state=state)
+    
+    if len(state["pathToVideos"]) > 0:
+        g.my_app.run(data=data, state=state, initial_events=[{"command": "import_videos"}])
+    else:
+        g.my_app.run(data=data, state=state)
 
 
 if __name__ == "__main__":
