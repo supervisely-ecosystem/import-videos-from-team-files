@@ -1,5 +1,5 @@
 <div align="center" markdown>
-<img src="https://i.imgur.com/Wo7XOMm.png"/>
+<img src="https://github.com/supervisely-ecosystem/import-videos-from-team-files/releases/download/v1.0.0/poster.png"/>
 
 
 
