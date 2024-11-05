@@ -11,12 +11,12 @@
   <a href="#How-To-Use">How To Use</a>
 </p>
 
-[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervise.ly/apps/supervisely-ecosystem/import-videos-from-team-files)
-[![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervise.ly/slack)
+[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervisely.com/apps/supervisely-ecosystem/import-videos-from-team-files)
+[![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervisely.com/slack)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/supervisely-ecosystem/import-videos-from-team-files)
-[![views](https://app.supervise.ly/public/api/v3/ecosystem.counters?repo=supervisely-ecosystem/import-videos-from-team-files&counter=views&label=views)](https://supervise.ly)
-[![used by teams](https://app.supervise.ly/public/api/v3/ecosystem.counters?repo=supervisely-ecosystem/import-videos-from-team-files&counter=downloads&label=used%20by%20teams)](https://supervise.ly)
-[![runs](https://app.supervise.ly/public/api/v3/ecosystem.counters?repo=supervisely-ecosystem/import-videos-from-team-files&counter=runs&label=runs&123)](https://supervise.ly)
+[![views](https://app.supervisely.com/public/api/v3/ecosystem.counters?repo=supervisely-ecosystem/import-videos-from-team-files&counter=views&label=views)](https://supervisely.com)
+[![used by teams](https://app.supervisely.com/public/api/v3/ecosystem.counters?repo=supervisely-ecosystem/import-videos-from-team-files&counter=downloads&label=used%20by%20teams)](https://supervisely.com)
+[![runs](https://app.supervisely.com/public/api/v3/ecosystem.counters?repo=supervisely-ecosystem/import-videos-from-team-files&counter=runs&label=runs&123)](https://supervisely.com)
 
 </div>
 
@@ -39,7 +39,7 @@ Application imports selected videos from `Team Files` to selected destination.
 
 ## How To Run 
 
-**Step 1**: Add app to your team from [Ecosystem](https://app.supervise.ly/apps/ecosystem/import-videos-from-team-files) if it is not there.
+**Step 1**: Add app to your team from [Ecosystem](https://app.supervisely.com/apps/ecosystem/import-videos-from-team-files) if it is not there.
 
 **Step 2**: Run app from `Team` -> `Plugins & Apps` page.  After running the app you will be redirected to the `Tasks` page.
 
